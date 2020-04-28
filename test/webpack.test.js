@@ -12,12 +12,14 @@ function build({ inputFs, entry }) {
 			alias: {
 				assert: 'assert@^1.1.1',
 				buffer: 'buffer@^4.3.0',
+				crypto: 'crypto-browserify@^3.11.0',
 				events: 'events@^3.0.0',
 				punycode: 'punycode@^1.2.4',
 				stream: 'stream-browserify@^2.0.2',
 				string_decoder: 'string_decoder@^1.0.0',
 				url: 'url@^0.11.0',
-				crypto: 'crypto-browserify@^3.11.0'
+				util: 'util@^0.11.0',
+				vm: 'vm-browserify@^1.0.1',
 			}
 		},
 		output: {
@@ -171,7 +173,6 @@ describe('multiple dependencies', () => {
 		expect(built).toBeInstanceOf(Buffer);
 		expect(built.toString().length).toBeGreaterThan(100);
 	}, 100000);
-
 
 
 
