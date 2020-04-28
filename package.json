@@ -1,0 +1,31 @@
+{
+  "name": "unpkg-fs",
+  "version": "1.0.0",
+  "description": "FS that creates a `node_modules` powered by UNPKG",
+  "main": "lib/unpkg-fs.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "got": "^10.7.0",
+    "memfs": "^3.1.2"
+  },
+  "devDependencies": {
+    "jest": "^25.4.0",
+    "webpack": "^5.0.0-beta.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/privatenumber/unpkg-fs.git"
+  },
+  "author": "Hiroki Osame <hiroki.osame@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/privatenumber/unpkg-fs/issues"
+  },
+  "homepage": "https://github.com/privatenumber/unpkg-fs#readme"
+}
