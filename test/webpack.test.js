@@ -85,7 +85,7 @@ describe('multiple dependencies', () => {
 
 		expect(built).toBeInstanceOf(Buffer);
 		expect(built.toString().length).toBeGreaterThan(100);
-	});
+	}, 10000);
 
 	test('@babel/code-frame', async () => {
 		const built = await build({
@@ -127,13 +127,13 @@ describe('multiple dependencies', () => {
 		expect(built.toString().length).toBeGreaterThan(100);
 	}, 100000);
 
-	// test('stream-browserify', async () => {
-	// 	const built = await build({
-	// 		inputFs: new UnpkgFs('stream-browserify@2.0.1'),
-	// 		entry: '/index.js',
-	// 	});
+	test('stream-browserify', async () => {
+		const built = await build({
+			inputFs: new UnpkgFs('stream-browserify@2.0.1'),
+			entry: '/index.js',
+		});
 
-	// 	expect(built).toBeInstanceOf(Buffer);
-	// 	expect(built.toString().length).toBeGreaterThan(100);
-	// }, 100000);
+		expect(built).toBeInstanceOf(Buffer);
+		expect(built.toString().length).toBeGreaterThan(100);
+	}, 100000);
 });
