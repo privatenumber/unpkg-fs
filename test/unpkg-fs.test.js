@@ -4,7 +4,7 @@ const { AssertionError } = require('assert');
 
 describe('readFile', () => {
 	test('fetch package.json', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.readFile('/package.json', (err, str) => {
 			expect(err).toBe(null);
 			expect(str.length).toBeGreaterThan(10);
@@ -14,7 +14,7 @@ describe('readFile', () => {
 	});
 
 	test('fetch file', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.readFile('/dist/vue.js', (err, str) => {
 			expect(err).toBe(null);
 			expect(str.length).toBeGreaterThan(10);
@@ -23,7 +23,7 @@ describe('readFile', () => {
 	});
 
 	test('error on undeclared dependency', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.readFile('/node_modules/react/index.js', (err, str) => {
 			expect(err).toBeInstanceOf(AssertionError);
 			expect(str).toBe(undefined);
@@ -32,9 +32,9 @@ describe('readFile', () => {
 	});
 
 	test('fetch dependency', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 
-		// Should read version from vue@latest/package.json
+		// Should read version from vue@2.6.11/package.json
 		fs.readFile('/node_modules/lodash/package.json', (err, str) => {
 			expect(err).toBe(null);
 			expect(str.length).toBeGreaterThan(10);
@@ -44,9 +44,9 @@ describe('readFile', () => {
 	});
 
 	test('fetch nested dependency', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 
-		// Should read version from vue@latest/package.json -> strip-indent@version/package.json
+		// Should read version from vue@2.6.11/package.json -> strip-indent@version/package.json
 		fs.readFile('/node_modules/yorkie/node_modules/strip-indent/package.json', (err, str) => {
 			expect(err).toBe(null);
 			expect(str.length).toBeGreaterThan(10);
@@ -89,7 +89,7 @@ describe('readFile', () => {
 describe('stat', () => {
 
 	test('package file', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.stat('/package.json', (err, stat) => {
 			expect(err).toBe(null);
 			expect(stat.isFile()).toBe(true);
@@ -98,7 +98,7 @@ describe('stat', () => {
 	});
 
 	test('package directory', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.stat('/dist/', (err, stat) => {
 			expect(err).toBe(null);
 			expect(stat.isDirectory()).toBe(true);
@@ -107,7 +107,7 @@ describe('stat', () => {
 	});
 
 	test('no extension', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.stat('/dist/vue.min', (err, stat) => {
 			expect(err).toBe(null);
 			expect(stat.isFile()).toBe(true);
@@ -116,7 +116,7 @@ describe('stat', () => {
 	});
 
 	test('node_modules', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.stat('/node_modules', (err, stat) => {
 			expect(err).toBe(null);
 			expect(stat.isDirectory()).toBe(true);
@@ -125,7 +125,7 @@ describe('stat', () => {
 	});
 
 	test('dependency', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.stat('/node_modules/lodash', (err, stat) => {
 			expect(err).toBe(null);
 			expect(stat.isDirectory()).toBe(true);
@@ -134,7 +134,7 @@ describe('stat', () => {
 	});
 
 	test('dependency package.json', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.stat('/node_modules/lodash/package.json', (err, stat) => {
 			expect(err).toBe(null);
 			expect(stat.isFile()).toBe(true);
@@ -143,7 +143,7 @@ describe('stat', () => {
 	});
 
 	test('nested dependency', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.stat('/node_modules/yorkie/node_modules/strip-indent/package.json', (err, stat) => {
 			expect(err).toBe(null);
 			expect(stat.isFile()).toBe(true);
@@ -152,7 +152,7 @@ describe('stat', () => {
 	});
 
 	test('with version', (cb) => {
-		const fs = new UnpkgFs('vue@latest');
+		const fs = new UnpkgFs('vue@2.6.11');
 		fs.stat('/node_modules/process@^0.11.10', (err, stat) => {
 			expect(err).toBe(null);
 			expect(stat.isDirectory()).toBe(true);

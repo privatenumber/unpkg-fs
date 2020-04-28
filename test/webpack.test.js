@@ -10,9 +10,14 @@ function build({ inputFs, entry }) {
 		resolve: {
 			extensions: [],
 			alias: {
+				assert: 'assert@^1.1.1',
+				buffer: 'buffer@^4.3.0',
 				events: 'events@^3.0.0',
-				buffer: 'buffer@^4.9.2',
+				punycode: 'punycode@^1.2.4',
 				stream: 'stream-browserify@^2.0.2',
+				string_decoder: 'string_decoder@^1.0.0',
+				url: 'url@^0.11.0',
+				crypto: 'crypto-browserify@^3.11.0'
 			}
 		},
 		output: {
@@ -136,4 +141,71 @@ describe('multiple dependencies', () => {
 		expect(built).toBeInstanceOf(Buffer);
 		expect(built.toString().length).toBeGreaterThan(100);
 	}, 100000);
+
+	test('randombytes', async () => {
+		const built = await build({
+			inputFs: new UnpkgFs('randombytes@^2.0.5'),
+			entry: '/browser.js',
+		});
+
+		expect(built).toBeInstanceOf(Buffer);
+		expect(built.toString().length).toBeGreaterThan(100);
+	}, 100000);
+
+	test('create-hash', async () => {
+		const built = await build({
+			inputFs: new UnpkgFs('create-hash@1.1.0'),
+			entry: '/browser.js',
+		});
+
+		expect(built).toBeInstanceOf(Buffer);
+		expect(built.toString().length).toBeGreaterThan(100);
+	}, 100000);
+
+	test('create-hash@1.2.0', async () => {
+		const built = await build({
+			inputFs: new UnpkgFs('create-hash@1.2.0'),
+			entry: '/browser.js',
+		});
+
+		expect(built).toBeInstanceOf(Buffer);
+		expect(built.toString().length).toBeGreaterThan(100);
+	}, 100000);
+
+
+
+
+
+
+	// Anything dependent on crypto-browserify seems to break
+
+	// test('brorand@1.1.0', async () => {
+	// 	const built = await build({
+	// 		inputFs: new UnpkgFs('brorand@1.1.0'),
+	// 		entry: '/index.js',
+	// 	});
+
+	// 	expect(built).toBeInstanceOf(Buffer);
+	// 	expect(built.toString().length).toBeGreaterThan(100);
+	// }, 100000);
+
+	// test('crypto-browserify@3.11.0', async () => {
+	// 	const built = await build({
+	// 		inputFs: new UnpkgFs('crypto-browserify@3.11.0'),
+	// 		entry: '/index.js',
+	// 	});
+
+	// 	expect(built).toBeInstanceOf(Buffer);
+	// 	expect(built.toString().length).toBeGreaterThan(100);
+	// }, 100000);
+
+	// test('uuid@3.2.1', async () => {
+	// 	const built = await build({
+	// 		inputFs: new UnpkgFs('uuid@3.2.1'),
+	// 		entry: '/v1.js',
+	// 	});
+
+	// 	expect(built).toBeInstanceOf(Buffer);
+	// 	expect(built.toString().length).toBeGreaterThan(100);
+	// }, 100000);
 });
